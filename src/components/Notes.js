@@ -10,7 +10,7 @@ const Notes = () => {
 
     //< -------------------------- Using Fetch to Get All Notes -------------------------- >
     const fetchNotes = async () => {
-        const response = await fetch("http://localhost:5000/api/tasks/fetchall", {
+        const response = await fetch("https://backend-todolist-tau.vercel.app/api/tasks/fetchall", {
             method: "GET",
             headers: {
                 "Content-Type":"application/json"
@@ -38,7 +38,7 @@ const Notes = () => {
     // < -------------------------- Using Fetch to Add a Note -------------------------- >
     const addANote = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:5000/api/tasks/create", {
+        const response = await fetch("https://backend-todolist-tau.vercel.app/api/tasks/create", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json",
@@ -57,7 +57,7 @@ const Notes = () => {
 
     // < -------------------------- Using Fetch to Delete a Note -------------------------- >
     const deleteNote = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/tasks/delete/${id}`, {
+        const response = await fetch(`https://backend-todolist-tau.vercel.app/api/tasks/delete/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -71,7 +71,7 @@ const Notes = () => {
 
     // < -------------------------- Using Fetch to Update a Note -------------------------- >
     const updateNote = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/tasks/update/${id}`, {
+        const response = await fetch(`https://backend-todolist-tau.vercel.app/api/tasks/update/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
