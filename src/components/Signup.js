@@ -13,7 +13,7 @@ const Signup = () => {
 
     const fetchUser = async (e) => {
         e.preventDefault()
-        const response = await fetch("https://backend-todolist-tau.vercel.app/api/auth/createuser", {
+        const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/auth/createuser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
