@@ -10,15 +10,25 @@ const Notes = () => {
 
     //< -------------------------- Using Fetch to Get All Notes -------------------------- >
     const fetchNotes = async () => {
-        const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/fetchall", {
-            method: "GET",
-            headers: {
-                "Content-Type":"application/json",
-                "auth-token":localStorage.getItem("token")
-            },
-        });
-        const data = await response.json();
-        setNotes(data);
+        try {
+            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/fetchall", {
+                method: "GET",
+                headers: {
+                    "Content-Type":"application/json",
+                    "auth-token":localStorage.getItem("token")
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            setNotes(data);
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+            alert('An error occurred: ' + error.message);
+        }
     };
 
     useEffect(()=>{
@@ -39,36 +49,57 @@ const Notes = () => {
     // < -------------------------- Using Fetch to Add a Note -------------------------- >
     const addANote = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/create", {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json",
-                "auth-token":localStorage.getItem("token")
-            },
-            body: JSON.stringify({
-                "title": newTitle,
-                "description": newDescription,
-            })
-        });
-        // eslint-disable-next-line
-        const json = await response.json();
-        setNotes([...notes, json]);
-        setNewTitle("")
+        try {
+            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "auth-token":localStorage.getItem("token")
+                },
+                body: JSON.stringify({
+                    "title": newTitle,
+                    "description": newDescription,
+                })
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            // eslint-disable-next-line
+            const json = await response.json();
+            setNotes([...notes, json]);
+            setNewTitle("");
+            setNewDescription("");
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+            alert('An error occurred: ' + error.message);
+        }
     };
 
 
     // < -------------------------- Using Fetch to Delete a Note -------------------------- >
     const deleteNote = async (id) => {
-        const response = await fetch(`https://mern-stack-backend-todolist.vercel.app/api/tasks/delete/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token":localStorage.getItem("token")
-            },
-        });
-        // eslint-disable-next-line
-        const json = await response.json();
-        setNotes(notes.filter(note => note._id !== id));
+        try {
+            const response = await fetch(`https://mern-stack-backend-todolist.vercel.app/api/tasks/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token":localStorage.getItem("token")
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            // eslint-disable-next-line
+            const json = await response.json();
+            setNotes(notes.filter(note => note._id !== id));
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+            alert('An error occurred: ' + error.message);
+        }
     };
 
 

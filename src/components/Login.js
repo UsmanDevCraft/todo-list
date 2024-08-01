@@ -4,28 +4,36 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const history = useNavigate();
-    const pushHistory = () => {
-        history("/signup");
-    };
 
     const [ creds, setCreds ] = useState({email: "", password: ""});
     const { email, password } = creds;
 
     const fetchUser = async (e) => {
         e.preventDefault()
-        const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/auth/loginuser", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({email, password})
-        });
-        const json = await response.json();
-        if(json.authToken){
-            history("/home");
-            localStorage.setItem("token", json.authToken)
-        } else {
-            alert(json.error)
+        try {
+            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/auth/loginuser", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({email, password})
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const json = await response.json();
+    
+            if(json.authToken){
+                localStorage.setItem("token", json.authToken)
+                history("/home");
+            } else {
+                alert(json.error)
+            }
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+            alert('An error occurred: ' + error.message);
         }
     };
 
@@ -47,7 +55,7 @@ const Login = () => {
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <p className='mt-2' style={{cursor: "pointer"}} onClick={pushHistory}><code>Don't have an account, signup here.</code></p>
+        <p className='mt-2' style={{cursor: "pointer"}} onClick={()=>{history("/signup")}}><code>Don't have an account, signup here.</code></p>
     </div>
   )
 }
