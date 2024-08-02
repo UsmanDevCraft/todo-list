@@ -11,7 +11,7 @@ const Login = () => {
     const fetchUser = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/auth/loginuser", {
+            const response = await fetch("https://backend-todolist-tan.vercel.app/api/auth/loginuser", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -11,7 +11,7 @@ const Notes = () => {
     //< -------------------------- Using Fetch to Get All Notes -------------------------- >
     const fetchNotes = async () => {
         try {
-            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/fetchall", {
+            const response = await fetch("https://backend-todolist-tan.vercel.app/api/tasks/fetchall", {
                 method: "GET",
                 headers: {
                     "Content-Type":"application/json",
@@ -50,7 +50,7 @@ const Notes = () => {
     const addANote = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://mern-stack-backend-todolist.vercel.app/api/tasks/create", {
+            const response = await fetch("https://backend-todolist-tan.vercel.app/api/tasks/create", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json",
@@ -81,7 +81,7 @@ const Notes = () => {
     // < -------------------------- Using Fetch to Delete a Note -------------------------- >
     const deleteNote = async (id) => {
         try {
-            const response = await fetch(`https://mern-stack-backend-todolist.vercel.app/api/tasks/delete/${id}`, {
+            const response = await fetch(`https://backend-todolist-tan.vercel.app/api/tasks/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const Notes = () => {
 
     // < -------------------------- Using Fetch to Update a Note -------------------------- >
     const updateNote = async (id) => {
-        const response = await fetch(`https://mern-stack-backend-todolist.vercel.app/api/tasks/update/${id}`, {
+        const response = await fetch(`https://backend-todolist-tan.vercel.app/api/tasks/update/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
