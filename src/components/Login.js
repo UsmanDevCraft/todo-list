@@ -56,6 +56,9 @@ const Login = () => {
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p className='mt-2' style={{cursor: "pointer"}} onClick={()=>{history("/signup")}}><code>Don't have an account, signup here.</code></p>
+        <br/>
+        <p>Email: <b>gmailtin@gmail.com</b></p>
+        <p>Password: <b>12345</b> (For test run)</p>
     </div>
   )
 }
